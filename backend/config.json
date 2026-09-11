@@ -1,0 +1,20 @@
+{
+  "server": {
+    "port": 3002,
+    "host": "0.0.0.0"
+  },
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "warehouse_db",
+    "user": "postgres",
+    "password": "postgres",
+    "max": 20,
+    "idleTimeoutMillis": 30000,
+    "connectionTimeoutMillis": 2000
+  },
+  "cors": {
+    "enabled": true,
+    "origins": ["*"]
+  }
+}

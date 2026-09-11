@@ -1,0 +1,1436 @@
+<!doctype html>
+<html lang="en"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Portfolio</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+        :root {
+            --pink: #f39ed9;
+            --orange: #e38932;
+            --purple: #9093f2;
+            --green: #c9dfd5;
+            --dark-blue: #212934;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            background-color: #ffffff !important;
+            background-image: none !important;
+        }
+
+        body {
+            font-family: 'Okomito', sans-serif;
+            font-weight: 400;
+            color: #830c0e;
+        }
+
+        /* Typography */
+        .type-display {
+            font-family: 'Okomito', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            line-height: 0.88;
+            color: #830c0e;
+        }
+        .type-title {
+            font-family: 'Okomito', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.05em;
+            color: #830c0e;
+        }
+        .type-label {
+            font-family: 'Roboto Mono', monospace;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.02em;
+            color: #830c0e;
+        }
+        .type-body {
+            font-family: 'Okomito', sans-serif;
+            font-weight: 400;
+            color: #830c0e;
+        }
+        .type-link {
+            font-family: 'Okomito', sans-serif;
+            font-weight: 300;
+            color: #830c0e;
+            text-decoration: none;
+        }
+        
+        /* Legacy class mappings for compatibility */
+        .typo-h1 {
+            font-family: 'Okomito', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            line-height: 0.88;
+            color: #830c0e;
+        }
+        .typo-h2 {
+            font-family: 'Okomito', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.05em;
+            color: #830c0e;
+        }
+        .typo-h3 {
+            font-family: 'Okomito', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            color: #830c0e;
+        }
+        .typo-h4 {
+            font-family: 'Roboto Mono', monospace;
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 0.75rem;
+            letter-spacing: 0.02em;
+            color: var(--dark-blue);
+        }
+        .typo-h5 {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.02em;
+            color: #830c0e;
+        }
+
+        /* Buttons */
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
+            padding: 6px 12px;
+            border: 1.5px solid #f39ed9;
+            background-color: #f39ed9;
+            color: #830c0e;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
+            font-family: 'Okomito', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0;
+            font-size: 16px;
+            border-radius: 9999px;
+        }
+        .btn-outline:hover {
+            background-color: #e77bb8 !important;
+            color: #830c0e !important;
+            border-color: #e77bb8 !important;
+        }
+        
+        /* Preserve hover states for CTA buttons */
+        button[data-template-id="hero-explore"]:hover,
+        button[data-template-id="hero-contact"]:hover,
+        button[data-template-id="contact-button"]:hover {
+            background-color: #e77bb8 !important;
+            border-color: #e77bb8 !important;
+        }
+        .btn-outline:focus-visible {
+            outline: 2px solid #830c0e;
+            outline-offset: 3px;
+        }
+        .btn-outline:active {
+            transform: scale(0.98);
+        }
+
+        /* Scroll reveal */
+        .reveal-el {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reveal-el.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-image-wrap.reveal-el {
+            opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-el {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* Hero */
+        .hero-section {
+            min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            padding: 48px 40px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, #f39ed9 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
+            opacity: 0.4;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        .hero-title {
+            font-weight: 900;
+            letter-spacing: -0.08em;
+            line-height: 0.88;
+            margin-bottom: 0;
+            color: #830c0e;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+            width: 100%;
+        }
+        .hero-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 2;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+        .hero-name {
+            font-size: 3.25rem;
+            font-weight: 400;
+            color: #830c0e;
+            margin-bottom: 0;
+            line-height: 0.88;
+            letter-spacing: -0.08em;
+            text-align: left;
+            width: 100%;
+            align-self: flex-start;
+        }
+        .hero-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 0;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: auto;
+        }
+        .hero-buttons .btn-outline {
+            width: auto;
+        }
+        .hero-image-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: calc(100% + 80px);
+            margin-left: -40px;
+            margin-right: -40px;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 0;
+        }
+        .hero-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 25%;
+            display: block;
+            align-self: flex-end;
+        }
+        .hero-backdrop {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+            pointer-events: none;
+            z-index: -1;
+            display: none !important;
+            background-image: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 40px 24px;
+            }
+            div[style*="max-width:100%"] {
+                padding: 0 24px !important;
+            }
+            .hero-image-wrap {
+                width: calc(100% + 48px);
+                margin-left: -24px;
+                margin-right: -24px;
+            }
+            .hero-content {
+                gap: 16px;
+            }
+            .hero-container {
+                gap: 24px;
+                margin-bottom: 24px;
+            }
+            .hero-title {
+                margin-bottom: 0;
+            }
+            #work-section {
+                padding: 64px 24px !important;
+            }
+        }
+        @media (max-width: 640px) {
+            .hero-buttons {
+                align-items: center;
+                margin-top: auto;
+            }
+            .hero-container {
+                align-items: stretch;
+                text-align: center;
+                gap: 16px;
+            }
+            .hero-content {
+                align-items: center;
+                text-align: center;
+            }
+            .hero-name {
+                align-self: center;
+            }
+            .hero-image-wrap {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+            .hero-image-wrap img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                object-position: 50% 25%;
+            }
+
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-image-wrap img {
+                transition: none;
+            }
+        }
+        @media (max-width: 520px) {
+            .hero-image-wrap {
+                display: flex;
+            }
+        }
+
+        /* Pills - removed pill styling */
+
+        /* Gallery Row - Single Project View */
+        .gallery-row {
+            padding: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.45s ease;
+            display: grid;
+            grid-template-columns: 0.8fr 2.2fr;
+            gap: 24px;
+            align-items: stretch;
+            margin-bottom: 48px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            width: 100%;
+        }
+        .gallery-row.is-active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
+            pointer-events: auto;
+        }
+        .gallery-row.is-next {
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .project-text-col {
+            display: flex;
+            flex-direction: column;
+            padding-right: 40px;
+            overflow: hidden;
+            transition: height 0.2s ease;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .project-text-col {
+                transition: none;
+            }
+        }
+        .project-nav-wrap {
+            margin-top: auto;
+            padding-top: 16px;
+        }
+        .project-expanded {
+            flex: 1 1 auto;
+            overflow: auto;
+        }
+        .project-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .project-tag-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #86cefe;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #830c0e;
+            line-height: 1;
+        }
+        .project-tag-pill[data-tag="branding"] {
+            background: #86cefe;
+        }
+        .project-tag-pill[data-tag="identity"] {
+            background: #e3e96d;
+        }
+        .project-tag-pill[data-tag="packaging"] {
+            background: #f39ed9;
+        }
+        .project-media-col {
+            display: flex;
+            flex-direction: column;
+        }
+        @media (max-width: 640px) {
+            .gallery-row {
+                grid-template-columns: 1fr;
+            }
+            .project-text-col {
+                grid-column: 1;
+                padding-right: 28px;
+            }
+            .project-media-col {
+                grid-column: 1;
+            }
+        }
+        .thumb-grid {
+            display: none;
+        }
+        .thumb-grid img {
+            display: none;
+        }
+
+        .case-study-link {
+            display: none;
+        }
+
+        /* Expanded project - always shown */
+        .carousel-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: var(--white);
+            contain: layout paint;
+            transform: translateZ(0);
+        }
+        .carousel-wrap img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .carousel-wrap img {
+            transition: opacity 0.4s ease, transform 0.35s ease;
+        }
+        .carousel-wrap img.carousel-active { 
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+            pointer-events: auto;
+        }
+        .carousel-wrap img.carousel-active:hover {
+            transform: scale(1.06);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .carousel-wrap img { transition: none; }
+            .carousel-wrap img.carousel-active:hover {
+                transform: scale(1);
+            }
+        }
+
+        .carousel-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            justify-content: center;
+        }
+        .carousel-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            background: var(--pink);
+            border: none;
+            cursor: pointer;
+            color: #830c0e;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .carousel-arrow:hover {
+            background: #e77bb8;
+        }
+        .carousel-arrow:focus-visible {
+            outline: 2px solid #830c0e;
+            outline-offset: 2px;
+        }
+        .nav-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 160px;
+            background: #f39ed9;
+            border: 1.5px solid #f39ed9;
+            cursor: pointer;
+            padding: 6px 12px;
+            min-height: 44px;
+            font-family: 'Okomito', sans-serif !important;
+            text-transform: none;
+            font-weight: 500 !important;
+            font-size: 16px !important;
+            letter-spacing: 0;
+            color: #830c0e;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+            border-radius: 9999px;
+        }
+        button[data-template-id="contact-button"],
+        button[data-template-id="modal-submit"] {
+            background: #f39ed9 !important;
+        }
+        .nav-pill:hover {
+            background-color: #e77bb8 !important;
+            color: #830c0e !important;
+            border-color: #e77bb8 !important;
+        }
+        .next-project-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            min-height: 44px;
+            margin-top: 16px;
+            font-family: 'Roboto Mono', monospace;
+        }
+        .next-project-btn:focus-visible {
+            outline: 2px solid #830c0e;
+            outline-offset: 2px;
+        }
+        .next-project-btn i {
+            color: #830c0e;
+            transition: color 0.2s;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+            align-items: end;
+        }
+        .about-grid .about-exp {
+            grid-column: 1 / 2;
+        }
+        .about-grid .about-edu {
+            grid-column: 2 / 3;
+        }
+        .about-grid .about-clients {
+            grid-column: 3 / 4;
+        }
+        .about-grid .about-contact {
+            grid-column: 4 / 5;
+        }
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transform: scale(1);
+            opacity: 0.75;
+            transition: opacity 0.25s ease;
+            overflow: hidden;
+        }
+        .about-text.about-active {
+            height: 360px;
+            transform: scale(1);
+            opacity: 1;
+        }
+        .about-text > p:last-child {
+            margin-top: auto;
+        }
+        .about-text > p[data-template-id*="-body"] {
+            opacity: 0.5;
+            transition: opacity 0.25s ease;
+        }
+        .about-text.about-active > p[data-template-id*="-body"] {
+            opacity: 1;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .about-text .about-subtitle,
+            .about-text > p[data-template-id] {
+                transition: none;
+                will-change: auto;
+            }
+        }
+        .about-subtitle {
+            font-family: 'Okomito', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            margin-top: 10px;
+            margin-bottom: 8px;
+            color: inherit;
+        }
+        .about-exp {
+            background: linear-gradient(to bottom, #be75e3 0%, #fb95f8 50%, #fdb0c1 100%);
+        }
+        .about-edu {
+            background: linear-gradient(to bottom, #f58b5d 0%, #ffffff 100%);
+        }
+        .about-clients {
+            background: linear-gradient(to bottom, #ea64d8 0%, #fbc177 100%);
+        }
+        .about-contact {
+            background: linear-gradient(to bottom, #f39ed9 0%, #ffffff 100%);
+        }
+        @media (max-width: 640px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                grid-template-areas: none;
+            }
+            .about-text {
+                display: none;
+            }
+            .about-text.about-active {
+                display: flex;
+            }
+            .about-grid .about-exp {
+                grid-column: 1;
+                grid-row: auto;
+                order: 1;
+            }
+            .about-grid .about-clients {
+                grid-column: 1;
+                grid-row: auto;
+                order: 2;
+            }
+            .about-grid .about-edu {
+                grid-column: 1;
+                grid-row: auto;
+                order: 3;
+            }
+            .about-grid .about-contact {
+                grid-column: 1;
+                grid-row: auto;
+                order: 4;
+            }
+            #about-mobile-nav {
+                display: flex;
+                gap: 12px;
+                justify-content: center;
+                margin-top: 24px;
+                grid-column: 1 / -1;
+            }
+            #about-mobile-nav .carousel-arrow {
+                width: 44px;
+                height: 44px;
+                padding: 0;
+                background: var(--pink);
+                border: none;
+                cursor: pointer;
+                color: #830c0e;
+                border-radius: 50%;
+                transition: background 0.2s;
+            }
+            #about-mobile-nav .carousel-arrow:hover {
+                background: #e77bb8;
+            }
+        }
+
+        /* Contact */
+        .contact-section {
+            background-color: #ffffff !important;
+            background-image: linear-gradient(to bottom, #f58b5d 0%, rgba(255,255,255,0) 100%) !important;
+            padding: 80px 40px;
+            width: 100%;
+        }
+        .contact-inner {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .contact-inner .typo-h1 {
+            font-weight: 900;
+        }
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 80px 24px;
+            }
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(33,41,52,0.6);
+            z-index: 11000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal-box {
+            background: var(--white);
+            padding: 48px;
+            max-width: 460px;
+            width: 90%;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-box a {
+            color: var(--dark-blue);
+        }
+        .modal-box a:hover { opacity: 0.7; }
+        .modal-close-x {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #830c0e;
+            transition: opacity 0.2s;
+        }
+        .modal-close-x:hover {
+            opacity: 0.7;
+        }
+        .modal-close-x:focus-visible {
+            outline: 2px solid #830c0e;
+            outline-offset: 2px;
+        }
+        #contact-form input,
+        #contact-form textarea {
+            box-sizing: border-box;
+        }
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            outline: 2px solid #f39ed9;
+            outline-offset: 0;
+            border-color: #f39ed9;
+        }
+
+        button[data-template-id="hero-explore"],
+        button[data-template-id="hero-contact"],
+        button[data-template-id="contact-button"],
+        button[data-template-id="modal-submit"],
+        button[data-template-id="modal-close"] {
+            padding: 6px 12px !important;
+            font-family: 'Okomito', sans-serif !important;
+            font-weight: 500 !important;
+            font-size: 16px !important;
+            opacity: 1 !important;
+            -webkit-text-fill-color: #830c0e !important;
+            flex: 0 0 160px !important;
+            width: 160px !important;
+        }
+
+    </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root">
+  <!-- HERO -->
+  <section class="hero-section" aria-label="Hero">
+   <div class="hero-content reveal-el">
+    <h1 class="hero-title" data-template-id="hero-title" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 900; font-style: normal; font-size: 373px;">portfolio</h1>
+    <div class="hero-container">
+     <p class="hero-name" data-template-id="hero-name" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal; font-size: 40px;">     kai gwan </p>
+    </div>
+    <div class="hero-buttons"><button class="btn-outline" data-template-id="hero-explore" onclick="document.getElementById('work-section').scrollIntoView({behavior:'smooth'});" style="background: rgb(243, 158, 217); color: rgb(131, 12, 14); font-weight: 500;"><span data-template-id="hero-explore-text" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 15px;">Explore</span></button> <button class="btn-outline" data-template-id="hero-contact" onclick="openContactModal();" style="text-decoration: none; display: inline-flex; background: rgb(243, 158, 217); color: rgb(131, 12, 14); font-weight: 500;"><span data-template-id="hero-contact-text" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Contact</span></button>
+    </div>
+   </div>
+   <div class="hero-image-wrap reveal-el"><img data-template-id="hero-portrait" loading="lazy" class="canva-image" src="canva://MAFDcQCyPbQ/1" alt="Female Hand with Stickers Holding a Cosmetic Tube">
+    <div class="hero-backdrop"></div>
+   </div>
+  </section><!-- WORK GALLERY -->
+  <section id="work-section" style="background:var(--white); padding: 64px 40px; position: relative;" aria-label="Work">
+   <div id="gallery-container" style="position: relative; width: 100%; display: block;"><!-- Project 1: Glam Makeup -->
+    <div class="gallery-row is-active" data-project-id="project-1">
+     <div class="project-text-col">
+      <h3 class="typo-h2" data-template-id="project-1-name" style="font-size: 40px; margin-bottom: 12px; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Glam Makeup</h3>
+      <div class="project-tags-container"><span class="project-tag-pill canva-tag" data-template-id="project-1-tag-1" style="background: rgb(134, 206, 254); color: rgb(131, 12, 14); font-weight: 700; font-style: normal; font-size: 10px;">BRANDING</span> <span class="project-tag-pill canva-tag" data-template-id="project-1-tag-2" style="background: rgb(227, 233, 109); color: rgb(131, 12, 14); font-weight: 700; font-style: normal; font-size: 10px;">IDENTITY</span>
+      </div>
+      <div class="project-expanded">
+       <div data-template-id="project-1-details" style="font-size: 16px; line-height: 1.7; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Brand identity and art direction for Glam Makeup, a cosmetics brand specializing in long-wear adhesive for face gems. Developed a complete visual system including logo design, packaging concepts, and campaign art direction. The design celebrates expressive, joy-driven visuals that capture the brand's playful spirit and premium positioning in the cosmetics market. Created cohesive brand guidelines spanning packaging, labeling, and digital applications.</div>
+      </div>
+      <div class="project-nav-wrap">
+       <div style="display: flex; gap: 12px; align-items: center;"><button class="next-project-btn prev-btn" aria-label="Previous project"><span class="nav-pill"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i><span data-template-id="project-1-prev" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Previous</span></span></button> <button class="next-project-btn next-btn" aria-label="Next project"><span class="nav-pill"><span data-template-id="project-1-next" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Next</span><i data-lucide="arrow-right" style="width:16px;height:16px;"></i></span></button>
+       </div>
+      </div>
+      <div style="visibility: hidden; height: 60px;"></div>
+     </div>
+     <div class="project-media-col">
+      <div class="carousel-wrap"><img data-template-id="swap-project-1-image-1" loading="lazy" class="carousel-active canva-image" src="canva://MAFDcaw91tM/1" alt="Happy Woman with Gems and Plaster on Face"> <img data-template-id="swap-project-1-image-2" loading="lazy" class="canva-image" src="canva://MAFDcbaaL_U/1" alt="Female Hand with Colorful Stickers Holding a Lip Gloss"> <img data-template-id="swap-first-project-image-3" loading="lazy" class="canva-image" src="canva://MAFDcSaeIGA/1" alt="Woman Applying Mascara on Her Female Friend's Lashes">
+      </div>
+      <div class="carousel-controls"><button class="carousel-arrow left-arrow" aria-label="Previous image"><i data-lucide="chevron-left" style="width:20px;height:20px;"></i></button> <button class="carousel-arrow right-arrow" aria-label="Next image"><i data-lucide="chevron-right" style="width:20px;height:20px;"></i></button>
+      </div>
+     </div>
+    </div><!-- Project 2: Pop Cosmetics -->
+    <div class="gallery-row is-next" data-project-id="project-2">
+     <div class="project-text-col">
+      <h3 class="typo-h2" data-template-id="project-2-name" style="font-size: 40px; margin-bottom: 12px; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Pop Cosmetics</h3>
+      <div class="project-tags-container"><span class="project-tag-pill canva-tag" data-template-id="project-2-tag-1" style="background: rgb(134, 206, 254); color: rgb(131, 12, 14); font-weight: 700; font-style: normal; font-size: 10px;">BRANDING</span> <span class="project-tag-pill canva-tag" data-template-id="project-2-tag-2" style="background: rgb(227, 233, 109); color: rgb(131, 12, 14); font-weight: 700; font-style: normal; font-size: 10px;">IDENTITY</span>
+      </div>
+      <div class="project-expanded">
+       <div data-template-id="project-2-details" style="font-size: 16px; line-height: 1.7; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Brand identity and visual direction for Pop Cosmetics. Developed a cohesive design system that balances playful energy with premium positioning. Created campaign art direction featuring bold typography, vibrant color palettes, and dynamic photography that resonates with a modern, diverse audience.</div>
+      </div>
+      <div class="project-nav-wrap">
+       <div style="display: flex; gap: 12px; align-items: center;"><button class="next-project-btn prev-btn" aria-label="Previous project"><span class="nav-pill"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i><span data-template-id="project-2-prev" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Previous</span></span></button> <button class="next-project-btn next-btn" aria-label="Next project"><span class="nav-pill"><span data-template-id="project-2-next" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Next</span><i data-lucide="arrow-right" style="width:16px;height:16px;"></i></span></button>
+       </div>
+      </div>
+      <div style="visibility: hidden; height: 60px;"></div>
+     </div>
+     <div class="project-media-col">
+      <div class="carousel-wrap"><img data-template-id="swap-project-2-image-1" loading="lazy" class="carousel-active canva-image" src="canva://MAFDcZWHl_8/1" alt="Woman Applying Yellow Eyeshadow"> <img data-template-id="swap-project-2-image-2" loading="lazy" class="canva-image" src="canva://MAFDcbBl4DM/1" alt="Two Happy Diverse Women in Colorful Makeup"> <img data-template-id="swap-project-2-image-3" loading="lazy" class="canva-image" src="canva://MAFDca5IOwo/1" alt="Woman with Face Jewels Under Her Eyes">
+      </div>
+      <div class="carousel-controls"><button class="carousel-arrow left-arrow" aria-label="Previous image"><i data-lucide="chevron-left" style="width:20px;height:20px;"></i></button> <button class="carousel-arrow right-arrow" aria-label="Next image"><i data-lucide="chevron-right" style="width:20px;height:20px;"></i></button>
+      </div>
+     </div>
+    </div><!-- Project 3: Cloudlet Tech -->
+    <div class="gallery-row is-next" data-project-id="project-3">
+     <div class="project-text-col">
+      <h3 class="typo-h2" data-template-id="project-3-name" style="font-size: 40px; margin-bottom: 12px; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Cloudlet Tech</h3>
+      <div class="project-tags-container"><span class="project-tag-pill canva-tag" data-template-id="project-3-tag-1" style="background: rgb(243, 158, 217); color: rgb(131, 12, 14); font-weight: 700; font-style: normal; font-size: 10px;">PACKAGING</span> <span class="project-tag-pill canva-tag" data-template-id="project-3-tag-2" style="background: rgb(134, 206, 254); color: rgb(131, 12, 14); font-weight: 700; font-style: normal; font-size: 10px;">BRANDING</span>
+      </div>
+      <div class="project-expanded">
+       <div data-template-id="project-3-details" style="font-size: 16px; line-height: 1.7; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Brand identity and website design for Cloudlet Tech, a lifestyle tech brand. Developed a gradient-led visual direction with responsive web UI and vibrant campaign imagery that captures the energy and innovation of the brand. Created a cohesive design system balancing modern aesthetics with functional usability across digital and print applications.</div>
+      </div>
+      <div class="project-nav-wrap">
+       <div style="display: flex; gap: 12px; align-items: center;"><button class="next-project-btn prev-btn" aria-label="Previous project"><span class="nav-pill"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i><span data-template-id="project-3-prev" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Previous</span></span></button> <button class="next-project-btn next-btn" aria-label="Next project"><span class="nav-pill"><span data-template-id="project-3-next" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Next</span><i data-lucide="arrow-right" style="width:16px;height:16px;"></i></span></button>
+       </div>
+      </div>
+      <div style="visibility: hidden; height: 60px;"></div>
+     </div>
+     <div class="project-media-col">
+      <div class="carousel-wrap"><img data-template-id="swap-project-3-image-1" loading="lazy" class="carousel-active canva-image" src="canva://MAFf8VJJ_a4/1" alt="High Flash Casual Older and Younger Woman Wearing Headphones"> <img data-template-id="swap-project-3-image-2" loading="lazy" class="canva-image" src="canva://MAFf8otwArU/1" alt="High Flash Casual Tech Older Woman Surrounded by Smartphones"> <img data-template-id="swap-project-3-image-3" loading="lazy" class="canva-image" src="canva://MAFf8jGnRuE/1" alt="High Flash Casual Tech Group Holding Phones to Their Ears">
+      </div>
+      <div class="carousel-controls"><button class="carousel-arrow left-arrow" aria-label="Previous image"><i data-lucide="chevron-left" style="width:20px;height:20px;"></i></button> <button class="carousel-arrow right-arrow" aria-label="Next image"><i data-lucide="chevron-right" style="width:20px;height:20px;"></i></button>
+      </div>
+     </div>
+    </div><!-- Project 4: Radiant Beauty -->
+    <div class="gallery-row is-next" data-project-id="project-4">
+     <div class="project-text-col">
+      <h3 class="typo-h2" data-template-id="project-4-name" style="font-size: 40px; margin-bottom: 12px; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Radiant Beauty</h3>
+      <div class="project-tags-container"><span class="project-tag-pill canva-tag" data-template-id="project-4-tag-1" style="background: rgb(134, 206, 254); color: rgb(131, 12, 14); font-weight: 700; font-style: normal; font-size: 10px;">BRANDING</span> <span class="project-tag-pill canva-tag" data-template-id="project-4-tag-2" style="background: rgb(243, 158, 217); color: rgb(131, 12, 14); font-weight: 700; font-style: normal; font-size: 10px;">PACKAGING</span>
+      </div>
+      <div class="project-expanded">
+       <div data-template-id="project-4-details" style="font-size: 16px; line-height: 1.7; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Brand identity and packaging design for Radiant Beauty, a luxury makeup tools and accessories brand. Developed a bold, vibrant color direction with precision art direction reflecting craftsmanship and quality. Created a cohesive visual system across packaging, labeling, and marketing collateral that elevates the brand positioning while resonating with beauty enthusiasts seeking premium tools and accessories.</div>
+      </div>
+      <div class="project-nav-wrap">
+       <div style="display: flex; gap: 12px; align-items: center;"><button class="next-project-btn prev-btn" aria-label="Previous project"><span class="nav-pill"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i><span data-template-id="project-4-prev" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Previous</span></span></button> <button class="next-project-btn next-btn" aria-label="Next project"><span class="nav-pill"><span data-template-id="project-4-next" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Next</span><i data-lucide="arrow-right" style="width:16px;height:16px;"></i></span></button>
+       </div>
+      </div>
+      <div style="visibility: hidden; height: 60px;"></div>
+     </div>
+     <div class="project-media-col">
+      <div class="carousel-wrap"><img data-template-id="swap-project-4-image-1" loading="lazy" class="carousel-active canva-image" src="canva://MAEhtLmL15A/1" alt="Purple Tube of Facial Cream on Orange Background"> <img data-template-id="swap-project-4-image-2" loading="lazy" class="canva-image" src="canva://MAEhtM4e5Io/1" alt="Colorful Eyeshadow Palette Flatlay"> <img data-template-id="swap-project-4-image-3" loading="lazy" class="canva-image" src="canva://MAEhtG2Q1kE/1" alt="Composition of Cosmetic Products on Pink Background">
+      </div>
+      <div class="carousel-controls"><button class="carousel-arrow left-arrow" aria-label="Previous image"><i data-lucide="chevron-left" style="width:20px;height:20px;"></i></button> <button class="carousel-arrow right-arrow" aria-label="Next image"><i data-lucide="chevron-right" style="width:20px;height:20px;"></i></button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- ABOUT -->
+  <section style="background-color: #ffffff !important; background-image: linear-gradient(to bottom, #f39ed9 0%, rgba(255,255,255,0) 100%) !important; padding: 64px 24px;" aria-label="About">
+   <div style="max-width:100%; padding: 0 40px; margin:0 auto;">
+    <h2 class="typo-h2 reveal-el" data-template-id="about-headline" style="width: 100%; display: block; text-align: center; font-size: 183px; margin-bottom: 32px; color: rgb(131, 12, 14); letter-spacing: -0.08em; font-family: Okomito; font-weight: 900; font-style: normal;">Visual Storyteller</h2>
+    <div class="about-grid">
+     <div class="about-text about-exp reveal-el" style="transition-delay:0.05s">
+      <p class="typo-h2" data-template-id="about-exp-title" style="margin-bottom: 8px; font-size: 40px; letter-spacing: -0.05em; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Experience</p>
+      <p class="about-subtitle" data-template-id="about-exp-subtitle" style="margin-top: 10px; margin-bottom: 8px; color: rgb(131, 12, 14); font-weight: 700; font-size: 13px;"></p>
+      <p data-template-id="about-exp-body" style="font-size: 16px; line-height: 1.1; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Senior Designer at Concept Media (2021–Present)
+
+Lead Visual Designer at Dynamic Agency (2018–2021)
+
+Junior Designer at Vivid Design (2016–2018)
+</p>
+     </div>
+     <div class="about-text about-edu reveal-el" style="transition-delay:0.1s">
+      <p class="typo-h2" data-template-id="about-edu-title" style="margin-bottom: 8px; color: rgb(131, 12, 14); font-size: 40px; letter-spacing: -0.05em; font-family: Okomito; font-weight: 300; font-style: normal;">Education</p>
+      <p class="about-subtitle" data-template-id="about-edu-subtitle" style="margin-top: 10px; margin-bottom: 8px; color: rgb(131, 12, 14); font-weight: 700; font-size: 13px;"></p>
+      <p data-template-id="about-edu-body" style="font-size: 16px; line-height: 1.1; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">MFA Graphic Design, South Academy of Design (2016)
+
+BFA Visual Communication, Southwest University of Art and Design (2014)</p>
+     </div>
+     <div class="about-text about-clients reveal-el" style="transition-delay:0.15s">
+      <p class="typo-h2" data-template-id="about-clients-title" style="margin-bottom: 8px; color: rgb(131, 12, 14); font-size: 40px; letter-spacing: -0.05em; font-family: Okomito; font-weight: 300; font-style: normal;">Clients</p>
+      <p data-template-id="about-clients-body" style="font-size: 16px; line-height: 1.1; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Circuit Systems
+Harvest Grocer
+Fashion Foundry
+Wares
+Radiant Skincare
+Clean Beauty
+Pop Cosmetics
+</p>
+     </div>
+     <div class="about-text about-contact reveal-el" style="transition-delay:0.2s">
+      <p class="typo-h2" data-template-id="about-contact-title" style="margin-bottom: 8px; font-size: 40px; letter-spacing: -0.05em; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">Contact</p>
+      <p class="about-subtitle" data-template-id="about-contact-subtitle" style="margin-top: 10px; margin-bottom: 8px; color: rgb(131, 12, 14); font-weight: 700; font-size: 13px;"></p>
+      <p data-template-id="about-contact-body" style="font-size: 16px; line-height: 1.1; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 300; font-style: normal;">hello@reallygreatsite.com 
+
+Based in Brooklyn, NY
+
+Open to freelance work and collaboration projects</p>
+     </div>
+     <div style="display: flex; gap: 12px; margin-top: 24px; justify-content: center; grid-column: 1 / -1;">
+      <button id="about-prev-btn" class="carousel-arrow" style="width: 44px; height: 44px; padding: 0; background: var(--pink); border: none; cursor: pointer; color: #830c0e; border-radius: 50%; transition: background 0.2s;" aria-label="Previous about card"><i data-lucide="chevron-left" style="width:20px;height:20px;"></i></button> <button id="about-next-btn" class="carousel-arrow" style="width: 44px; height: 44px; padding: 0; background: var(--pink); border: none; cursor: pointer; color: #830c0e; border-radius: 50%; transition: background 0.2s;" aria-label="Next about card"><i data-lucide="chevron-right" style="width:20px;height:20px;"></i></button>
+     </div>
+     <div id="about-mobile-nav" style="display: none;"></div>
+    </div>
+   </div>
+  </section><!-- CONTACT -->
+  <section class="contact-section" aria-label="Contact">
+   <div class="contact-inner">
+    <h2 class="typo-h1 reveal-el" data-template-id="contact-headline" style="font-size: 184px; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 900; font-style: normal;">Contact </h2>
+    <div class="reveal-el" style="transition-delay:0.1s">
+     <button class="btn-outline" data-template-id="contact-button" id="contact-open-btn" onclick="openContactModal();" style="background: rgb(243, 158, 217); color: rgb(131, 12, 14); font-weight: 500;"><span data-template-id="contact-button-text" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Get in touch</span></button>
+    </div>
+   </div>
+  </section><!-- MODAL -->
+  <div class="modal-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-el">
+   <div class="modal-box">
+    <button class="modal-close-x" id="modal-close-btn" aria-label="Close modal"><i data-lucide="x" style="width:24px;height:24px;"></i></button> <!-- Form View -->
+    <div id="modal-form-view">
+     <h3 class="typo-h3" id="modal-title-el" data-template-id="modal-title" style="font-size: 27px; margin-bottom: 24px; color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal;">Get in touch</h3>
+     <form id="contact-form" onsubmit="handleContactFormSubmit(event)">
+      <div style="margin-bottom:20px;">
+       <label for="modal-name-input" class="typo-h5" style="display:block; margin-bottom:8px;">Name</label> <input type="text" id="modal-name-input" placeholder="Your name" style="width:100%; padding:12px; border:1px solid #ccc; border-radius:6px; font-family:'Okomito',sans-serif; font-size:1rem;">
+      </div>
+      <div style="margin-bottom:20px;">
+       <label for="modal-email-input" class="typo-h5" style="display:block; margin-bottom:8px;">Email</label> <input type="email" id="modal-email-input" placeholder="your@email.com" style="width:100%; padding:12px; border:1px solid #ccc; border-radius:6px; font-family:'Okomito',sans-serif; font-size:1rem;">
+      </div>
+      <div style="margin-bottom:24px;">
+       <label for="modal-message-input" class="typo-h5" style="display:block; margin-bottom:8px;">Message</label> <textarea id="modal-message-input" placeholder="Tell me about your project..." style="width:100%; padding:12px; border:1px solid #ccc; border-radius:6px; font-family:'Okomito',sans-serif; font-size:1rem; min-height:120px; resize:vertical;"></textarea>
+      </div><button type="submit" class="btn-outline" data-template-id="modal-submit" style="width: 100%; background: rgb(243, 158, 217); color: rgb(131, 12, 14); font-weight: 500;"><span data-template-id="modal-submit-text" style="color: rgb(131, 12, 14); font-family: Okomito; font-weight: 500; font-style: normal; font-size: 16px;">Send Message</span></button>
+     </form>
+    </div><!-- Confirmation View -->
+    <div id="modal-confirmation-view" style="display:none; text-align:center;">
+     <h3 class="typo-h3" style="font-size:1.4rem; margin-bottom:16px; color:#830c0e;">Thank you!</h3>
+     <p class="typo-body" style="font-size:1rem; line-height:1.6; color:#830c0e; margin-bottom:24px;">Your message has been sent. I'll get back to you soon.</p><button class="btn-outline" onclick="closeContactModal()" style="width:100%;">Close</button>
+    </div>
+   </div>
+  </div><!-- Hidden swap images for reliable image replacement --> <img id="swap-project-3-image-1" data-template-id="swap-project-3-image-1" loading="lazy" style="display:none;" src="canva://MAFf8VJJ_a4/1" alt="High Flash Casual Older and Younger Woman Wearing Headphones"> <img id="swap-project-3-image-2" data-template-id="swap-project-3-image-2" loading="lazy" style="display:none;" src="canva://MAFf8otwArU/1" alt="High Flash Casual Tech Older Woman Surrounded by Smartphones"> <img id="swap-project-3-image-3" data-template-id="swap-project-3-image-3" loading="lazy" style="display:none;" src="canva://MAFf8jGnRuE/1" alt="High Flash Casual Tech Group Holding Phones to Their Ears"> <img id="swap-project-2-image-3" data-template-id="swap-project-2-image-3" loading="lazy" style="display:none;" src="canva://MAFDca5IOwo/1" alt="Woman with Face Jewels Under Her Eyes"> <img id="swap-project-4-image-1" data-template-id="swap-project-4-image-1" loading="lazy" style="display:none;" src="canva://MAEhtLmL15A/1" alt="Purple Tube of Facial Cream on Orange Background"> <img id="swap-project-4-image-2" data-template-id="swap-project-4-image-2" loading="lazy" style="display:none;" src="canva://MAEhtM4e5Io/1" alt="Colorful Eyeshadow Palette Flatlay"> <img id="swap-project-4-image-3" data-template-id="swap-project-4-image-3" loading="lazy" style="display:none;" src="canva://MAEhtG2Q1kE/1" alt="Composition of Cosmetic Products on Pink Background"> <!-- Hidden swap images for reliable image replacement --> <img id="swap-project-1-image-1" data-template-id="swap-project-1-image-1" loading="lazy" style="display:none;" src="canva://MAFDcaw91tM/1" alt="Happy Woman with Gems and Plaster on Face"> <img id="upload-project-1-image-1" data-template-id="upload-project-1-image-1" loading="lazy" style="display:none;" src="canva://MAHC2WeIvOM/1" alt="Woman with colorful face stickers smiling"> <img id="swap-project-1-image-2" data-template-id="swap-project-1-image-2" loading="lazy" style="display:none;" src="canva://MAFDcbaaL_U/1" alt="Female Hand with Colorful Stickers Holding a Lip Gloss"> <img id="upload-project-1-image-2" data-template-id="upload-project-1-image-2" loading="lazy" style="display:none;" src="canva://MAHCftfHZAA/1" alt="Hand with colorful stickers holding red cosmetic tube"> <img id="swap-first-project-image-3" data-template-id="swap-first-project-image-3" loading="lazy" style="display:none;" src="canva://MAFDcSaeIGA/1" alt="Woman Applying Mascara on Her Female Friend's Lashes"> <img id="swap-project-2-image-1" data-template-id="swap-project-2-image-1" loading="lazy" style="display:none;" src="canva://MAFDcZWHl_8/1" alt="Woman Applying Yellow Eyeshadow"> <img id="swap-project-2-image-2" data-template-id="swap-project-2-image-2" loading="lazy" style="display:none;" src="canva://MAFDcbBl4DM/1" alt="Two Happy Diverse Women in Colorful Makeup">
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+        // Gallery navigation constants
+        const projectIds = ['project-1', 'project-2', 'project-3', 'project-4'];
+        let activeProjectIndex = 0;
+        let carouselIndices = {
+            'project-1': 0,
+            'project-2': 0,
+            'project-3': 0,
+            'project-4': 0
+        };
+
+        function setActiveProject(index) {
+            projectIds.forEach((id, i) => {
+                const row = document.querySelector(`.gallery-row[data-project-id="${id}"]`);
+                if (i === index) {
+                    row.classList.remove('is-next');
+                    row.classList.add('is-active');
+                } else {
+                    row.classList.remove('is-active');
+                    row.classList.add('is-next');
+                }
+            });
+            activeProjectIndex = index;
+            syncGalleryHeight();
+        }
+
+        function scrollToNextProject() {
+            const nextIndex = (activeProjectIndex + 1) % projectIds.length;
+            setActiveProject(nextIndex);
+        }
+
+        function scrollToPreviousProject() {
+            const prevIndex = (activeProjectIndex - 1 + projectIds.length) % projectIds.length;
+            setActiveProject(prevIndex);
+        }
+
+        function changeSlide(projectId, dir) {
+            const row = document.querySelector(`.gallery-row[data-project-id="${projectId}"]`);
+            const carousel = row.querySelector('.carousel-wrap');
+            const imgs = carousel.querySelectorAll('img:not([style*="display: none"])');
+            if (imgs.length === 0) return;
+            
+            imgs[carouselIndices[projectId]].classList.remove('carousel-active');
+            carouselIndices[projectId] = (carouselIndices[projectId] + dir + imgs.length) % imgs.length;
+            imgs[carouselIndices[projectId]].classList.add('carousel-active');
+        }
+
+        function syncGalleryHeight() {
+            const container = document.getElementById('gallery-container');
+            const activeRow = container.querySelector('.gallery-row.is-active');
+            if (activeRow) {
+                container.style.height = activeRow.offsetHeight + 'px';
+            }
+        }
+
+        // About carousel navigation
+        function initAboutCarousel() {
+            const aboutCards = document.querySelectorAll('.about-text');
+            const aboutPrevBtn = document.getElementById('about-prev-btn');
+            const aboutNextBtn = document.getElementById('about-next-btn');
+            const aboutMobileNav = document.getElementById('about-mobile-nav');
+            let aboutActiveCardIndex = 0;
+
+            // Set first card as active
+            if (aboutCards.length > 0) {
+                aboutCards[0].classList.add('about-active');
+            }
+
+            // Helper function to reposition mobile nav after active card
+            const repositionMobileNav = () => {
+                const isMobileNow = window.innerWidth <= 640;
+                if (isMobileNow) {
+                    const activeCard = aboutCards[aboutActiveCardIndex];
+                    if (activeCard && aboutMobileNav) {
+                        activeCard.after(aboutMobileNav);
+                    }
+                }
+            };
+
+            // Click handler for previous button
+            const handlePrev = () => {
+                aboutCards[aboutActiveCardIndex].classList.remove('about-active');
+                aboutActiveCardIndex = (aboutActiveCardIndex - 1 + aboutCards.length) % aboutCards.length;
+                aboutCards[aboutActiveCardIndex].classList.add('about-active');
+                repositionMobileNav();
+            };
+
+            // Click handler for next button
+            const handleNext = () => {
+                aboutCards[aboutActiveCardIndex].classList.remove('about-active');
+                aboutActiveCardIndex = (aboutActiveCardIndex + 1) % aboutCards.length;
+                aboutCards[aboutActiveCardIndex].classList.add('about-active');
+                repositionMobileNav();
+            };
+
+            // Hover handlers
+            const handlePrevHover = () => {
+                aboutPrevBtn.style.background = '#e77bb8';
+            };
+
+            const handleNextHover = () => {
+                aboutNextBtn.style.background = '#e77bb8';
+            };
+
+            const handleButtonOut = (btn) => {
+                btn.style.background = 'var(--pink)';
+            };
+
+            // Attach click listeners
+            aboutPrevBtn.addEventListener('click', handlePrev);
+            aboutNextBtn.addEventListener('click', handleNext);
+
+            // Attach hover listeners
+            aboutPrevBtn.addEventListener('mouseenter', handlePrevHover);
+            aboutPrevBtn.addEventListener('mouseleave', () => handleButtonOut(aboutPrevBtn));
+            aboutNextBtn.addEventListener('mouseenter', handleNextHover);
+            aboutNextBtn.addEventListener('mouseleave', () => handleButtonOut(aboutNextBtn));
+
+            // Card click handlers
+            aboutCards.forEach((card, idx) => {
+                card.addEventListener('click', () => {
+                    if (aboutActiveCardIndex !== idx) {
+                        aboutCards[aboutActiveCardIndex].classList.remove('about-active');
+                        aboutActiveCardIndex = idx;
+                        card.classList.add('about-active');
+                        repositionMobileNav();
+                    }
+                });
+            });
+
+            // Initial mobile nav setup
+            repositionMobileNav();
+
+            // Handle window resize
+            const handleResize = () => {
+                repositionMobileNav();
+            };
+            window.addEventListener('resize', handleResize);
+        }
+
+        // Scroll reveal via IntersectionObserver
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        function observeElement(el) {
+            revealObserver.observe(el);
+        }
+
+        // Hero backdrop effect
+        function initHeroBackdrop() {
+            const portraitImg = document.querySelector('[data-template-id="hero-portrait"]');
+            const backdropEl = document.querySelector('.hero-backdrop');
+            
+            if (!portraitImg || !backdropEl) return;
+            
+            const updateBackdrop = () => {
+                const src = portraitImg.getAttribute('src');
+                if (src) {
+                    backdropEl.style.backgroundImage = `url('${src}')`;
+                }
+            };
+            
+            // Update on initial load
+            updateBackdrop();
+            
+            // Watch for src changes
+            const observer = new MutationObserver(updateBackdrop);
+            observer.observe(portraitImg, { attributes: true, attributeFilter: ['src'] });
+        }
+
+        // Check for reduced motion preference
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function closeContactModal() {
+            const modal = document.getElementById('contact-modal');
+            modal.classList.remove('open');
+            // Reset form and views
+            setTimeout(() => {
+                document.getElementById('modal-form-view').style.display = 'block';
+                document.getElementById('modal-confirmation-view').style.display = 'none';
+                document.getElementById('contact-form').reset();
+            }, 300);
+        }
+
+        function openContactModal() {
+            const modal = document.getElementById('contact-modal');
+            modal.classList.add('open');
+            // Focus on first input
+            setTimeout(() => {
+                document.getElementById('modal-name-input').focus();
+            }, 100);
+        }
+
+        async function handleContactFormSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('modal-name-input').value.trim();
+            const email = document.getElementById('modal-email-input').value.trim();
+            const message = document.getElementById('modal-message-input').value.trim();
+            
+            // Get or create error message element
+            let errorMsg = document.getElementById('contact-form-error');
+            if (!errorMsg) {
+                errorMsg = document.createElement('p');
+                errorMsg.id = 'contact-form-error';
+                errorMsg.style.color = '#830c0e';
+                errorMsg.style.fontSize = '0.9rem';
+                errorMsg.style.marginBottom = '16px';
+                errorMsg.style.textAlign = 'center';
+                document.getElementById('contact-form').insertBefore(errorMsg, document.getElementById('contact-form').firstChild);
+            }
+            
+            if (!name || !email || !message) {
+                errorMsg.textContent = 'Please fill in all fields';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            
+            // Clear error message on success
+            errorMsg.style.display = 'none';
+            errorMsg.textContent = '';
+            
+            // Disable submit button and show loading state
+            const submitBtn = document.querySelector('button[data-template-id="modal-submit"]');
+            const originalText = submitBtn.querySelector('span').textContent;
+            submitBtn.disabled = true;
+            submitBtn.querySelector('span').textContent = 'Sending...';
+            
+            // Save to Canva Sheet via Data SDK
+            const result = await window.dataSdk.create({
+                name: name,
+                email: email,
+                message: message,
+                submitted_at: new Date().toISOString()
+            });
+            
+            // Re-enable submit button
+            submitBtn.disabled = false;
+            submitBtn.querySelector('span').textContent = originalText;
+            
+            if (result.isOk) {
+                // Show confirmation view
+                document.getElementById('modal-form-view').style.display = 'none';
+                document.getElementById('modal-confirmation-view').style.display = 'block';
+            } else {
+                errorMsg.textContent = 'Failed to send message. Please try again.';
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        // Safe helper to mirror swap images to target elements with retry logic
+        function safelyMirrorSwapImage(swapElementId, targetSelectors) {
+            const swapImg = document.getElementById(swapElementId);
+            if (!swapImg) return;
+
+            const mirrorImage = () => {
+                const src = swapImg?.getAttribute('src');
+                if (src && !src.startsWith('data:')) {
+                    targetSelectors.forEach(selector => {
+                        const targetImg = document.querySelector(selector);
+                        if (targetImg && targetImg !== null) {
+                            let retryCount = 0;
+                            const maxRetries = 10;
+                            const attemptSet = () => {
+                                targetImg.setAttribute('src', src);
+                                targetImg.onload = () => {
+                                    // Image loaded successfully
+                                };
+                                targetImg.onerror = () => {
+                                    if (retryCount < maxRetries) {
+                                        retryCount++;
+                                        const delay = Math.pow(2, retryCount) * 100;
+                                        setTimeout(attemptSet, delay);
+                                    }
+                                };
+                            };
+                            attemptSet();
+                        }
+                    });
+                }
+            };
+
+            // Mirror on initial load
+            mirrorImage();
+
+            // Mirror whenever swap image src changes
+            const observer = new MutationObserver(() => {
+                mirrorImage();
+            });
+            observer.observe(swapImg, { attributes: true, attributeFilter: ['src'] });
+        }
+
+        // Data SDK handler for contact form submissions
+        const dataHandler = {
+            onDataChanged(data) {
+                // Data handler receives all submissions
+                // No UI update needed here - form handles confirmation
+            }
+        };
+
+        // Initialize Data SDK
+        async function initDataSDK() {
+            const result = await window.dataSdk.init(dataHandler);
+            if (!result.isOk) {
+                console.error('Failed to initialize Data SDK');
+            }
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initDataSDK();
+            initAboutCarousel();
+            syncGalleryHeight();
+
+            // Attach carousel arrow handlers to all projects
+            projectIds.forEach(projectId => {
+                const row = document.querySelector(`.gallery-row[data-project-id="${projectId}"]`);
+                const leftArrow = row.querySelector('.carousel-arrow.left-arrow');
+                const rightArrow = row.querySelector('.carousel-arrow.right-arrow');
+                const prevBtn = row.querySelector('.prev-btn');
+                const nextBtn = row.querySelector('.next-btn');
+
+                if (leftArrow) {
+                    leftArrow.addEventListener('click', () => changeSlide(projectId, -1));
+                }
+                if (rightArrow) {
+                    rightArrow.addEventListener('click', () => changeSlide(projectId, 1));
+                }
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', scrollToPreviousProject);
+                }
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', scrollToNextProject);
+                }
+            });
+
+            // Modal event listeners
+            const contactModal = document.getElementById('contact-modal');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            
+            // Close button X
+            if (modalCloseBtn) {
+                modalCloseBtn.addEventListener('click', closeContactModal);
+            }
+            
+            // Close modal when clicking outside the modal box
+            if (contactModal) {
+                contactModal.addEventListener('click', (e) => {
+                    if (e.target === contactModal) {
+                        closeContactModal();
+                    }
+                });
+            }
+            
+            // Close modal on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && contactModal.classList.contains('open')) {
+                    closeContactModal();
+                }
+            });
+
+
+            
+            // Sync gallery height on window resize
+            window.addEventListener('resize', syncGalleryHeight);
+            
+            // Sync gallery height when images load
+            document.querySelectorAll('.carousel-wrap img').forEach(img => {
+                img.addEventListener('load', syncGalleryHeight);
+            });
+
+            // Mirror swap images to project carousel images
+            safelyMirrorSwapImage('swap-project-1-image-1', [
+                '.gallery-row[data-project-id="project-1"] .carousel-wrap img:nth-child(1)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-1-image-2', [
+                '.gallery-row[data-project-id="project-1"] .carousel-wrap img:nth-child(2)'
+            ]);
+
+            safelyMirrorSwapImage('swap-first-project-image-3', [
+                '.gallery-row[data-project-id="project-1"] .carousel-wrap img:nth-child(3)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-2-image-1', [
+                '.gallery-row[data-project-id="project-2"] .carousel-wrap img:nth-child(1)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-2-image-2', [
+                '.gallery-row[data-project-id="project-2"] .carousel-wrap img:nth-child(2)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-2-image-3', [
+                '.gallery-row[data-project-id="project-2"] .carousel-wrap img:nth-child(3)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-3-image-1', [
+                '.gallery-row[data-project-id="project-3"] .carousel-wrap img:nth-child(1)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-3-image-2', [
+                '.gallery-row[data-project-id="project-3"] .carousel-wrap img:nth-child(2)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-3-image-3', [
+                '.gallery-row[data-project-id="project-3"] .carousel-wrap img:nth-child(3)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-4-image-1', [
+                '.gallery-row[data-project-id="project-4"] .carousel-wrap img:nth-child(1)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-4-image-2', [
+                '.gallery-row[data-project-id="project-4"] .carousel-wrap img:nth-child(2)'
+            ]);
+
+            safelyMirrorSwapImage('swap-project-4-image-3', [
+                '.gallery-row[data-project-id="project-4"] .carousel-wrap img:nth-child(3)'
+            ]);
+
+            // Observe all reveal elements
+            if (prefersReduced) {
+                document.querySelectorAll('.reveal-el').forEach(el => {
+                    el.classList.add('revealed');
+                });
+            } else {
+                document.querySelectorAll('.reveal-el').forEach(el => {
+                    revealObserver.observe(el);
+                });
+            }
+
+            // Safety fallback: immediately reveal all .reveal-el elements on page load
+            // This prevents blank pages if JS fails or IntersectionObserver doesn't trigger
+            setTimeout(() => {
+                document.querySelectorAll('.reveal-el:not(.revealed)').forEach(el => {
+                    el.classList.add('revealed');
+                });
+            }, 100);
+
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a12ecfa6e1597947',t:'MTc4MjY3MTkzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>

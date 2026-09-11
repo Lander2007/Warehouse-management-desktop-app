@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-800/80;
+  }
+  
+  body {
+    @apply bg-[#07090e] text-gray-100 antialiased selection:bg-blue-500/30 selection:text-blue-200;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #root {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  /* Custom Premium Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #07090e;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #161c2c;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #232c45;
+  }
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(13, 18, 32, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+.glass-modal {
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseBorder {
+  0%, 100% {
+    border-color: rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 15px -3px var(--glow-color, rgba(59, 130, 246, 0.1));
+  }
+  50% {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 25px 0px var(--glow-color, rgba(59, 130, 246, 0.25));
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.glow-blue {
+  --glow-color: rgba(59, 130, 246, 0.15);
+  animation: pulseBorder 4s infinite ease-in-out;
+}
+
+.glow-emerald {
+  --glow-color: rgba(16, 185, 129, 0.15);
+  animation: pulseBorder 4s infinite ease-in-out;
+}
+
+.glow-purple {
+  --glow-color: rgba(139, 92, 246, 0.15);
+  animation: pulseBorder 4s infinite ease-in-out;
+}
+
+.glow-orange {
+  --glow-color: rgba(249, 115, 22, 0.15);
+  animation: pulseBorder 4s infinite ease-in-out;
+}
+
+/* Smooth Interactive Elements */
+.tab-slider-btn {
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tab-slider-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #3b82f6;
+  transition: all 0.25s ease;
+  transform: translateX(-50%);
+}
+
+.tab-slider-btn.active::after {
+  width: 80%;
+}
+
+/* Modern inputs custom focus border gradient indicator */
+.input-premium {
+  @apply bg-[#0c101c]/80 border border-gray-800 rounded-lg text-gray-100 placeholder-gray-500 transition-all duration-200;
+}
+.input-premium:focus {
+  @apply border-blue-500/80 outline-none ring-2 ring-blue-500/20 bg-[#0e1424];
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Print Overrides */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  body > * {
+    display: none !important;
+  }
+  body > #print-receipt-container-direct,
+  body > #print-receipt-container-direct * {
+    display: block !important;
+    visibility: visible !important;
+  }
+  body > #print-receipt-container-direct {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80mm;
+    margin: 0;
+    padding: 10px;
+    font-family: monospace;
+    background: white !important;
+    color: black !important;
+    direction: rtl;
+  }
+}
